@@ -26,7 +26,7 @@ body {
 /* Greeting Text */
 .greeting-text {
     position: absolute;
-    top: 5rem;
+    top: 3rem;
     text-align: center;
 }
 
@@ -155,7 +155,7 @@ body {
 /* Invitation Text */
 .invitation-text {
     position: absolute;
-    bottom: 8rem;
+    bottom: 5rem;
     text-align: center;
 }
 
@@ -187,7 +187,7 @@ body {
 /* Status Message */
 .status-message {
     position: absolute;
-    bottom: 8rem;
+    bottom: 5rem;
     text-align: center;
     font-size: 1rem;
     color: #718096;
@@ -308,7 +308,7 @@ body {
 /* Responsive Adjustments */
 @media (max-width: 640px) {
     .greeting-text {
-        top: 3rem;
+        top: 2rem;
     }
 
     .greeting-text h1 {
@@ -316,7 +316,7 @@ body {
     }
 
     .invitation-text {
-        bottom: 6rem;
+        bottom: 4rem;
     }
 
     .invitation-text p {
@@ -326,11 +326,11 @@ body {
 
 @media (max-height: 700px) {
     .greeting-text {
-        top: 2rem;
+        top: 1.5rem;
     }
 
     .invitation-text {
-        bottom: 4rem;
+        bottom: 3rem;
     }
 }
 
