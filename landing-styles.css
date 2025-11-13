@@ -155,7 +155,7 @@ body {
 /* Invitation Text */
 .invitation-text {
     position: absolute;
-    bottom: 8rem;
+    bottom: 12rem;
     text-align: center;
 }
 
@@ -187,7 +187,7 @@ body {
 /* Status Message */
 .status-message {
     position: absolute;
-    bottom: 8rem;
+    bottom: 12rem;
     text-align: center;
     font-size: 1rem;
     color: #718096;
@@ -316,7 +316,7 @@ body {
     }
 
     .invitation-text {
-        bottom: 6rem;
+        bottom: 10rem;
     }
 
     .invitation-text p {
@@ -330,7 +330,7 @@ body {
     }
 
     .invitation-text {
-        bottom: 4rem;
+        bottom: 8rem;
     }
 }
 
