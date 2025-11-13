@@ -116,6 +116,8 @@ app.post('/api/text-to-speech', async (req, res) => {
     try {
         const { text, voice_id = ELEVENLABS_VOICE_ID, model_id = 'eleven_monolingual_v1' } = req.body;
 
+        console.log('TTS request - text length:', text?.length, 'voice_id:', voice_id);
+
         // Call ElevenLabs API
         const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice_id}`, {
             method: 'POST',
@@ -135,7 +137,9 @@ app.post('/api/text-to-speech', async (req, res) => {
         });
 
         if (!response.ok) {
-            throw new Error(`ElevenLabs API error: ${response.status}`);
+            const errorText = await response.text();
+            console.error('ElevenLabs API error:', response.status, errorText);
+            throw new Error(`ElevenLabs API error: ${response.status} - ${errorText}`);
         }
 
         // Stream audio back to client
@@ -144,7 +148,7 @@ app.post('/api/text-to-speech', async (req, res) => {
 
     } catch (error) {
         console.error('Text-to-speech error:', error);
-        res.status(500).json({ error: 'Failed to generate speech' });
+        res.status(500).json({ error: 'Failed to generate speech', details: error.message });
     }
 });
 

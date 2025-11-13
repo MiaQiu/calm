@@ -341,6 +341,8 @@ class CalmApp {
         this.updateStatus('Preparing voice response...');
 
         try {
+            console.log('Sending text to TTS:', text);
+
             // Send to ElevenLabs TTS service via backend
             const response = await fetch('/api/text-to-speech', {
                 method: 'POST',
@@ -353,11 +355,16 @@ class CalmApp {
                 })
             });
 
+            console.log('TTS response status:', response.status);
+
             if (!response.ok) {
-                throw new Error(`TTS request failed: ${response.status}`);
+                const errorText = await response.text();
+                console.error('TTS error response:', errorText);
+                throw new Error(`TTS request failed: ${response.status} - ${errorText}`);
             }
 
             const audioBlob = await response.blob();
+            console.log('Audio blob size:', audioBlob.size);
             return URL.createObjectURL(audioBlob);
 
         } catch (error) {
