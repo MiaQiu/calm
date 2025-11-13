@@ -12,7 +12,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Middleware
 app.use(express.json());
-app.use(express.static('public')); // Serve your frontend files from 'public' folder
+app.use(express.static('.')); // Serve static files from root (for Vercel compatibility)
+app.use(express.static('public')); // Also serve from public folder for any remaining files
 
 // Configuration from environment variables
 const DEEPGRAM_API_KEY = process.env.DEEPGRAM_API_KEY;

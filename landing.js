@@ -63,9 +63,6 @@ class CalmApp {
         this.buttonText.style.display = 'block';
         this.statusMessage.style.display = 'block';
 
-        // Play welcome audio immediately
-        await this.playWelcomeAudio();
-
         // Start active listening
         await this.startActiveListening();
     }
