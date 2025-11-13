@@ -25,6 +25,10 @@ class CalmApp {
         this.silenceThreshold = 2000; // 2 seconds of silence to stop
         this.volumeThreshold = 0.02; // Original threshold
 
+        // Pre-loaded welcome audio
+        this.welcomeAudioUrl = null;
+        this.welcomeAudioLoaded = false;
+
         // DOM Elements
         this.breatheButton = document.getElementById('breatheButton');
         this.greetingText = document.getElementById('greetingText');
@@ -43,10 +47,45 @@ class CalmApp {
 
     init() {
         this.breatheButton.addEventListener('click', () => this.startSession());
+
+        // Pre-load welcome audio on page load
+        this.preloadWelcomeAudio();
+
         // Auto-start session after 2 seconds
         // setTimeout(() => {
         //     this.startSession();
         // }, 2000);
+    }
+
+    async preloadWelcomeAudio() {
+        try {
+            console.log('Pre-loading welcome audio...');
+
+            const response = await fetch('/api/text-to-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: 'Hi, I am glad you are here',
+                    model_id: 'eleven_monolingual_v1'
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to pre-load audio: ${response.status}`);
+            }
+
+            const audioBlob = await response.blob();
+            this.welcomeAudioUrl = URL.createObjectURL(audioBlob);
+            this.welcomeAudioLoaded = true;
+
+            console.log('✓ Welcome audio pre-loaded successfully');
+
+        } catch (error) {
+            console.error('Failed to pre-load welcome audio:', error);
+            // Continue anyway - we'll handle this gracefully
+        }
     }
 
     async startSession() {
@@ -63,6 +102,11 @@ class CalmApp {
         this.buttonText.style.display = 'block';
         this.statusMessage.style.display = 'block';
 
+        // Play welcome audio if loaded
+        if (this.welcomeAudioLoaded && this.welcomeAudioUrl) {
+            await this.playWelcomeAudio();
+        }
+
         // Start active listening
         await this.startActiveListening();
     }
@@ -73,7 +117,7 @@ class CalmApp {
         this.buttonText.textContent = 'Responding';
 
         try {
-            this.responseAudio.src = '/audio/i_am_here.mp3';
+            this.responseAudio.src = this.welcomeAudioUrl;
             await this.responseAudio.play();
 
             // Wait for audio to finish
@@ -86,6 +130,7 @@ class CalmApp {
             });
         } catch (error) {
             console.error('Failed to play welcome audio:', error);
+            // Continue even if audio fails
         }
     }
 
