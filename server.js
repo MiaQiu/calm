@@ -160,11 +160,18 @@ app.get('/api/health', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🎙️  Calm AI Coach server running on port ${PORT}`);
-    console.log(`📝 Frontend: http://localhost:${PORT}`);
-    console.log(`🏥 Health check: http://localhost:${PORT}/api/health`);
-});
+
+// Only start server if not in Vercel serverless environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`🎙️  Calm AI Coach server running on port ${PORT}`);
+        console.log(`📝 Frontend: http://localhost:${PORT}`);
+        console.log(`🏥 Health check: http://localhost:${PORT}/api/health`);
+    });
+}
+
+// Export for Vercel serverless
+module.exports = app;
 
 // Alternative: Using Anthropic Claude instead of OpenAI
 /*
