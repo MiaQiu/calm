@@ -23,7 +23,7 @@ class CalmApp {
         this.silenceTimeout = null;
         this.isSpeaking = false;
         this.silenceThreshold = 2000; // 2 seconds of silence to stop
-        this.volumeThreshold = 0.02; // Adjust based on testing
+        this.volumeThreshold = 0.01; // Lowered threshold for better sensitivity
 
         // DOM Elements
         this.breatheButton = document.getElementById('breatheButton');
@@ -147,6 +147,11 @@ class CalmApp {
                 sum += normalized * normalized;
             }
             const volume = Math.sqrt(sum / bufferLength);
+
+            // Debug logging
+            if (Math.random() < 0.1) { // Log 10% of the time to avoid spam
+                console.log('Volume level:', volume.toFixed(4), 'Threshold:', this.volumeThreshold);
+            }
 
             // Check if speaking
             if (volume > this.volumeThreshold) {
