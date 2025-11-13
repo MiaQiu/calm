@@ -23,7 +23,7 @@ class CalmApp {
         this.silenceTimeout = null;
         this.isSpeaking = false;
         this.silenceThreshold = 2000; // 2 seconds of silence to stop
-        this.volumeThreshold = 0.01; // Lowered threshold for better sensitivity
+        this.volumeThreshold = 0.02; // Original threshold
 
         // DOM Elements
         this.breatheButton = document.getElementById('breatheButton');
