@@ -26,3 +26,4 @@ build/
 # Audio files (if storing pre-recorded responses locally)
 audio/*.mp3
 audio/*.wav
+.vercel
