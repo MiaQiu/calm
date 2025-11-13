@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Calm - AI Coach</title>
+
+    <meta name="theme-color" content="#6b9bd1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- App Header -->
+            <h1 class="app-title">Calm</h1>
+            <p class="subtitle">Your AI coach is listening</p>
+
+            <!-- Main Button -->
+            <div class="button-container">
+                <button id="mainButton" class="main-button">
+                    <div class="button-icon">
+                        <!-- Microphone SVG Icon -->
+                        <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line stroke-linecap="round" x1="12" y1="19" x2="12" y2="23"/>
+                            <line stroke-linecap="round" x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                        <div class="pulse-ring"></div>
+                    </div>
+                    <span class="button-text">Start</span>
+                </button>
+            </div>
+
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message">
+                Ready to help you
+            </div>
+
+            <!-- Transcription Display (initially hidden) -->
+            <div id="transcriptionDisplay" class="transcription-display" style="display: none;">
+                <div class="transcription-label">You said:</div>
+                <div id="transcriptionText" class="transcription-text"></div>
+            </div>
+        </div>
+
+        <!-- Close Button (initially hidden) -->
+        <button id="closeButton" class="close-button" style="display: none;">
+            End Session
+        </button>
+
+        <!-- Hidden Audio Element for Response Playback -->
+        <audio id="responseAudio" preload="auto"></audio>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

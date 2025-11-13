@@ -2,52 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calm - You're Not Alone</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Calm - Take a Moment</title>
+
+    <meta name="theme-color" content="#5EB4AF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="stylesheet" href="landing-styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <!-- App Title -->
-            <h1 class="app-title">Take a Deep Breath</h1>
-            <p class="subtitle">I'm here to listen</p>
-
-            <!-- Main Interaction Button -->
-            <div class="button-container">
-                <button id="mainButton" class="main-button" aria-label="Status indicator" aria-live="polite">
-                    <div class="button-icon">
-                        <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                            <line x1="12" y1="19" x2="12" y2="23"></line>
-                            <line x1="8" y1="23" x2="16" y2="23"></line>
-                        </svg>
-                        <div class="pulse-ring"></div>
-                    </div>
-                    <span class="button-text">Starting...</span>
-                </button>
-            </div>
-
-            <!-- Status Message -->
-            <div id="statusMessage" class="status-message"></div>
-
-            <!-- Audio Player (hidden) -->
-            <audio id="responseAudio" preload="auto"></audio>
+    <div class="app-wrapper">
+        <!-- Greeting Text -->
+        <div id="greetingText" class="greeting-text">
+            <h1>It's okay to be overwhelmed.</h1>
+            <p id="subtitle" class="subtitle" style="display: none;">Your AI coach is listening</p>
         </div>
 
-        <!-- Transcription Display -->
+        <!-- Breathing Circle Button -->
+        <div class="circle-container">
+            <!-- Outer glow rings -->
+            <div class="glow-ring glow-ring-outer"></div>
+            <div class="glow-ring glow-ring-middle"></div>
+
+            <!-- Main touchable circle -->
+            <button id="breatheButton" class="breathe-circle" aria-label="Take a moment to breathe and find support">
+                <!-- Inner soft highlight -->
+                <div class="inner-highlight"></div>
+
+                <!-- Microphone Icon (initially hidden) -->
+                <svg id="micIcon" class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line stroke-linecap="round" stroke-width="2" x1="12" y1="19" x2="12" y2="23"/>
+                    <line stroke-linecap="round" stroke-width="2" x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+
+                <!-- Button Text (initially hidden) -->
+                <span id="buttonText" class="button-text" style="display: none;">Listening</span>
+
+                <!-- Subtle center dot (initially visible) -->
+                <div id="centerDot" class="center-dot"></div>
+            </button>
+        </div>
+
+        <!-- Invitation Text -->
+        <div id="invitationText" class="invitation-text">
+            <p>Tap here to take a moment.</p>
+        </div>
+
+        <!-- Status Message (initially hidden) -->
+        <div id="statusMessage" class="status-message" style="display: none;">
+            Listening... I'm here when you need to talk
+        </div>
+
+        <!-- Transcription Display (initially hidden) -->
         <div id="transcriptionDisplay" class="transcription-display" style="display: none;">
-            <div class="transcription-label">You said:</div>
+            <div class="transcription-label">YOU SAID:</div>
             <div id="transcriptionText" class="transcription-text"></div>
         </div>
 
-        <!-- Close Button (appears during conversation) -->
+        <!-- Close Button (initially hidden) -->
         <button id="closeButton" class="close-button" style="display: none;">
-            I'm Done for Now
+            End Session
         </button>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Hidden Audio Element for Response Playback -->
+    <audio id="responseAudio" preload="auto"></audio>
+
+    <script src="landing.js"></script>
 </body>
 </html>

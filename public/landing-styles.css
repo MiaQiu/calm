@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+}
+
+.app-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #FFF8F0 0%, #FFF5EB 50%, #E8F4F2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+/* Greeting Text */
+.greeting-text {
+    position: absolute;
+    top: 5rem;
+    text-align: center;
+}
+
+.greeting-text h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #4a5568;
+    letter-spacing: 0.025em;
+    line-height: 1.5;
+}
+
+.greeting-text .subtitle {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #718096;
+    margin-top: 0.5rem;
+    letter-spacing: 0.025em;
+}
+
+/* Circle Container */
+.circle-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Glow Rings */
+.glow-ring {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.glow-ring-outer {
+    width: 16rem;
+    height: 16rem;
+    background-color: rgba(129, 230, 217, 0.2);
+    animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.glow-ring-middle {
+    width: 14rem;
+    height: 14rem;
+    background-color: rgba(94, 211, 200, 0.25);
+    animation: pulse-breath 4s ease-in-out infinite;
+}
+
+/* Main Breathe Circle */
+.breathe-circle {
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #81E6D9 0%, #5EBAAF 100%);
+    border: none;
+    box-shadow:
+        0 10px 40px rgba(94, 180, 175, 0.3),
+        inset 0 -5px 20px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    animation: breathe 4s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    outline: none;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.breathe-circle:active {
+    transform: scale(0.95);
+}
+
+.breathe-circle:focus-visible {
+    box-shadow:
+        0 10px 40px rgba(94, 180, 175, 0.5),
+        inset 0 -5px 20px rgba(255, 255, 255, 0.3),
+        0 0 0 3px rgba(94, 180, 175, 0.5);
+}
+
+/* State: Listening */
+.breathe-circle.listening {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* State: Speaking */
+.breathe-circle.speaking {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* State: Processing */
+.breathe-circle.processing {
+    animation: none;
+}
+
+/* State: Responding */
+.breathe-circle.responding {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Inner Highlight */
+.inner-highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* Center Dot */
+.center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+}
+
+/* Invitation Text */
+.invitation-text {
+    position: absolute;
+    bottom: 8rem;
+    text-align: center;
+}
+
+.invitation-text p {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #718096;
+    letter-spacing: 0.025em;
+}
+
+/* Microphone Icon */
+.mic-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    stroke: white;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+/* Button Text */
+.button-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 0.025em;
+    pointer-events: none;
+}
+
+/* Status Message */
+.status-message {
+    position: absolute;
+    bottom: 8rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #718096;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.status-message.error {
+    color: #e74c3c;
+}
+
+/* Transcription Display */
+.transcription-display {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+    right: 2rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in;
+}
+
+.transcription-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.transcription-text {
+    font-size: 0.95rem;
+    color: #4a5568;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    padding: 1rem;
+    border: 2px solid #6b9bd1;
+    background: transparent;
+    color: #6b9bd1;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+    background: #6b9bd1;
+    color: white;
+}
+
+.close-button:active {
+    transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes pulse-breath {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.25;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.15;
+    }
+}
+
+@keyframes pulse-slow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+    .greeting-text {
+        top: 3rem;
+    }
+
+    .greeting-text h1 {
+        font-size: 1.25rem;
+    }
+
+    .invitation-text {
+        bottom: 6rem;
+    }
+
+    .invitation-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 700px) {
+    .greeting-text {
+        top: 2rem;
+    }
+
+    .invitation-text {
+        bottom: 4rem;
+    }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .breathe-circle,
+    .glow-ring {
+        animation: none;
+    }
+
+    .breathe-circle {
+        transition: transform 0.1s ease;
+    }
+}
